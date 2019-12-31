@@ -2,7 +2,7 @@
 This is a minimal computational graph library built completely from scratch. This library is just like a mini version of tensorflow.
 ### Architecture
 It uses a python class `Node`. This Node will calculate a value which represents it output.
-```
+```python
 class Node:
 	def __init__(self, inbound_nodes=[]):
 		#nodes from which this node recieves values
