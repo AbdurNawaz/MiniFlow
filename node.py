@@ -6,6 +6,9 @@ class Node:
 		self.outbound_nodes = []
 
 		self.value = None
+
+		self.gradients = {}
+
 		#Adding this node as an outbound node for each of its inbound node
 		for n in inbound_nodes:
 			n.outbound_nodes.append(self)
@@ -14,5 +17,7 @@ class Node:
 
 		raise NotImplementedError
 
+	def backward(self):
 
-
+		raise NotImplementedError
+		
