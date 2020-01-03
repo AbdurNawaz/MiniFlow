@@ -2,6 +2,7 @@ import numpy as np
 from sklearn.datasets import load_boston
 from sklearn.utils import shuffle, resample
 from main import *
+import matplotlib.pyplot as plt
 
 # Load data
 data = load_boston()
@@ -37,7 +38,7 @@ feed_dict = {
     b2: b2_
 }
 
-epochs = 500
+epochs = 100
 # Total number of examples
 m = X_.shape[0]
 batch_size = 11
@@ -46,8 +47,11 @@ steps_per_epoch = m // batch_size
 graph = topological_sort(feed_dict)
 trainables = [W1, b1, W2, b2]
 
-print("Total number of examples = {}".format(m))
+g = {t:np.zeros_like(t) for t in trainables}
 
+
+print("Total number of examples = {}".format(m))
+loss1 = []
 # Step 4
 for i in range(epochs):
     loss = 0
@@ -67,5 +71,11 @@ for i in range(epochs):
         sgd_update(trainables)
 
         loss += graph[-1].value
-
+    loss1.append(loss)
     print("Epoch: {}, Loss: {:.3f}".format(i+1, loss/steps_per_epoch))
+
+fig = plt.figure()
+
+plt.plot(np.arange(1, epochs+1), loss1)
+plt.show()
+fig.savefig('SGD')

@@ -79,6 +79,23 @@ class MSE(Node):
 		self.gradients[self.inbound_nodes[0]] = (2/self.m)*self.diff
 		self.gradients[self.inbound_nodes[1]] = (-2/self.m)*self.diff
 
+class CrossEnt(Node):
+
+	def __init__(self, y, a):
+		Node.__init__(self, [y, a])
+
+	def forward(self):
+		y = self.inbound_nodes[0].value.reshape(-1, 1)
+		a = self.inbound_nodes[1].value.reshape(-1, 1)
+		self.log = np.log(a)
+		self.value = -np.sum(y*self.log)
+
+	def backward(self):
+		y = self.inbound_nodes[0].value.reshape(-1, 1)
+		a = self.inbound_nodes[1].value.reshape(-1, 1)
+		self.gradients[self.inbound_nodes[0]] = -y/a
+		self.gradients[self.inbound_nodes[1]] = -self.log
+
 def topological_sort(feed_dict):
     """
     Sort generic nodes in topological order using Kahn's Algorithm.
@@ -133,3 +150,11 @@ def sgd_update(trainables, learning_rate=1e-2):
 	for t in trainables:
 		partial = t.gradients[t]
 		t.value -= learning_rate*partial
+
+def RMSProp(trainables,g , learning_rate=1e-2):
+	eps = 1e-8
+	beta = 0.9
+	for t in trainables:
+		dl = t.gradients[t]
+		g[t] = beta*g[t] + (1-beta)*(dl**2)
+		t.value -= learning_rate*dl/(np.sqrt(g[t])+eps)
