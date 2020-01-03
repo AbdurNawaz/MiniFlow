@@ -31,7 +31,9 @@ As of now this library has:
 * Placeholders
 * Sigmoid activation function
 * Mean Squared Error loss function
+* Cross Entropy loss function
 * Stochastic Gradient descent optimization algorithm
+* RMSprop optimization algorithm
 
 #### Graph
 The `topological_graph` function creates a graph of neural networks by implementing [Topological sorting](https://en.wikipedia.org/wiki/Topological_sorting) using [Kanh's algorithm](https://en.wikipedia.org/wiki/Topological_sorting#Kahn.27s_algorithm).
