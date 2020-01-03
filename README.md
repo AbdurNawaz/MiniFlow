@@ -39,9 +39,9 @@ As of now this library has:
 
 ### We can clearly see the difference between SGD and RMSProp here
 ###### SGD
-
+![SGD](https://raw.githubusercontent.com/AbdurNawaz/MiniFlow/master/SGD.png)
 ###### RMSProp
-
+![SGD](https://raw.githubusercontent.com/AbdurNawaz/MiniFlow/master/RMSProp.png)
 
 #### Graph
 The `topological_graph` function creates a graph of neural networks by implementing [Topological sorting](https://en.wikipedia.org/wiki/Topological_sorting) using [Kanh's algorithm](https://en.wikipedia.org/wiki/Topological_sorting#Kahn.27s_algorithm).
